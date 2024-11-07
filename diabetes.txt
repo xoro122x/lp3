@@ -1,0 +1,15 @@
+x = df.drop(columns = ['Outcome'])
+y = df['Outcome']
+from sklearn.preprocessing import StandardScaler,MinMaxScaler
+sc = StandardScaler()
+x = sc.fit_transform(x)
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42)
+from sklearn.neighbors import KNeighborsClassifier
+model = KNeighborsClassifier()
+model.fit(x_train,y_train)
+pred = model.predict(x_test)
+from sklearn.metrics import accuracy_score,confusion_matrix,recall_score,f1_score
+print('Accuracy score : ',accuracy_score(y_test,pred))
+print('Re score : ',recall_score(y_test,pred))
+print('F1 score : ',f1_score(y_test,pred))

@@ -1,0 +1,55 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main(){
+    float profit=0;
+
+    //inputs
+    int n = 5;
+    int max_size = 10;
+    vector<float> object_no = {1,2,3,4,5};
+    vector<int> profits = {10,15,10,20,8};
+    vector<int> weights = {3,3,2,5,1};
+    //
+
+    vector<float> pbw(n);
+    vector<vector<float>> bag;
+
+    for(int i=0;i<n;i++){
+        pbw[i] = (float)profits[i]/weights[i];
+    }
+
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n-1-i;j++){
+            if(pbw[j]<pbw[j+1]){
+                swap(pbw[j],pbw[j+1]);
+                swap(profits[j],profits[j+1]);
+                swap(weights[j],weights[j+1]);
+                swap(object_no[j],object_no[j+1]);
+            }
+        }
+    }
+
+    int k=0;
+    while(max_size>0 && k<n){
+        if(weights[k]>max_size){
+            bag.push_back({object_no[k],(float)max_size/weights[k]});
+            profit+=((float)max_size/weights[k])*profits[k];
+            max_size=0;
+        }
+        else{
+            bag.push_back({object_no[k],1});
+            profit+=profits[k];
+            max_size-=weights[k];
+            k++; 
+        }
+    }
+
+    cout<<"Bag consists : "<<endl;
+    for(int i=0;i<bag.size();i++){
+        cout<<bag[i][0]<<"    "<<bag[i][1]<<endl;
+    }
+    cout<<endl<<"Total profit is : "<<profit;
+
+}

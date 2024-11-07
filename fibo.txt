@@ -1,0 +1,46 @@
+#include <iostream>
+
+void fibonacci(int n) {
+    int a = 0, b = 1, next;
+
+    std::cout << "Fibonacci sequence up to " << n << " terms:\n";
+
+    for (int i = 0; i < n; ++i) {
+        if (i == 0) {
+            std::cout << a << " ";
+        } else if (i == 1) {
+            std::cout << b << " ";
+        } else {
+            next = a + b;
+            std::cout << next << " ";
+            a = b;
+            b = next;
+        }
+    }
+}
+
+int main() {
+    int n = 10;  // Change this value to get more Fibonacci numbers
+    fibonacci(n);
+    return 0;
+}
+
+
+
+#include <iostream>
+
+int fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    int n = 10;  // Number of terms to display
+    std::cout << "Fibonacci sequence up to " << n << " terms:\n";
+    for (int i = 0; i < n; ++i) {
+        std::cout << fibonacci(i) << " ";
+    }
+    return 0;
+}
